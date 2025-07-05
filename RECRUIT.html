@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RECRUIT - 採用情報</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: url("syakun.png") center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    .hero .top-right-label {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 1.2rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      z-index: 2;
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      background: white;
+    }
+
+    .menu a {
+      background-color: white;
+      border: 2px solid #004b9b;
+      border-radius: 8px;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      color: #004b9b;
+      font-weight: bold;
+      text-align: center;
+      width: 250px;
+      transition: background-color 0.3s;
+    }
+
+    .menu a:hover {
+      background-color: #004b9b;
+      color: white;
+    }
+
+    .jobs-section {
+      background: linear-gradient(135deg, #00aaff, #00ccff);
+      padding: 4rem 2rem;
+      color: white;
+    }
+
+    .jobs-section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .job-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .job-card {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 300px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      text-align: center;
+      position: relative;
+    }
+
+    .job-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .job-card .label {
+      position: absolute;
+      bottom: 0;
+      background-color: #004b9b;
+      color: white;
+      width: 100%;
+      padding: 0.8rem;
+      font-weight: bold;
+    }
+
+    .philosophy::before {
+      content: "RECRUIT\A採用情報";
+      white-space: pre;
+      position: absolute;
+      color: transparent;
+      -webkit-text-stroke: 2px white;
+      font-size: 4rem;
+      font-weight: bold;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  .hero {
+    font-size: 1.4rem;
+  }
+
+  .menu a {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .job-card {
+    width: 90%;
+  }
+}
+
+.hamburger-menu {
+  background-color: white;
+  padding: 1rem;
+  position: relative;
+  z-index: 1000;
+}
+
+.hamburger-icon {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #004b9b;
+  border: 2px solid #004b9b;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.menu-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.menu-links a {
+  background-color: white;
+  border: 2px solid #004b9b;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  color: #004b9b;
+  font-weight: bold;
+  text-align: center;
+  width: 250px;
+  transition: background-color 0.3s;
+}
+
+.menu-links a:hover {
+  background-color: #004b9b;
+  color: white;
+}
+
+/* スマホ時にハンバーガー表示 */
+@media screen and (max-width: 768px) {
+  .hamburger-icon {
+    display: block;
+  }
+
+  .menu-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .menu-links.show {
+    display: flex;
+  }
+
+  .menu-links a {
+    width: 90%;
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <!-- ハンバーガーメニュー：ここから -->
+  <div class="hamburger-menu">
+    <div class="hamburger-icon" onclick="toggleMenu()">☰</div>
+    <nav class="menu-links">
+      <a href="#vision">企業ビジョン</a>
+      <a href="#personality">求める人物像</a>
+      <a href="#jobs">職種紹介</a>
+      <a href="#data">データで見る田尻</a>
+      <a href="#environment">働く環境</a>
+      <a href="#internship">インターンシップ</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+  </div>
+  <!-- ハンバーガーメニュー：ここまで -->
+
+  <div class="hero">
+    <div class="top-right-label">RECRUIT - 採用情報</div>
+    <p>《経営理念》<br>
+      "厳しさ"と"勇気"をもって、<br>
+      常に"前進"と"向上"を旨とし、<br>
+      【窓】を通じて、<br>
+      "お客様の満足"と"地域社会の発展"に貢献する</p>
+  </div>
+
+  <div class="menu">
+    <a href="#vision">企業ビジョン</a>
+    <a href="#personality">求める人物像</a>
+    <a href="#jobs">職種紹介</a>
+    <a href="#data">データで見る田尻</a>
+    <a href="#environment">働く環境</a>
+    <a href="#internship">インターンシップ</a>
+    <a href="#faq">よくある質問</a>
+  </div>
+
+<section id="vision" style="padding: 4rem 2rem; background-color: #fff;">
+  <div style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+  ">
+    <!-- 左側：テキスト -->
+    <div style="flex: 1; min-width: 300px;">
+      <h2 style="color: #004b9b;">企業ビジョン</h2>
+      <p style="font-size: 1.1rem; line-height: 1.8;">
+        私たち田尻は、創立91年を迎え、次なる節目となる<br>
+        <strong>「創業100周年」</strong>に向けて、新たな挑戦を始めています。<br><br>
+        その記念すべき時期には、<strong>売上規模100億円</strong>という目標を掲げています。<br>
+        この実現のためには、<strong>技術革新</strong>だけでなく、<strong>人材育成と組織の進化</strong>が不可欠です。<br><br>
+        私たちは、より多くのお客様に価値あるサービスを届け、<br>
+        共に未来を切り拓いてまいります。
+      </p>
+    </div>
+
+    <!-- 右側：画像（クリックで拡大） -->
+    <div style="flex: 1; min-width: 300px; text-align: center;">
+      <img src="100oku.png" alt="売上100億円ビジョン" style="max-width: 100%; height: auto; border-radius: 8px; cursor: pointer;" onclick="openModal(this.src)" />
+    </div>
+  </div>
+</section>
+
+<!-- モーダル表示用 -->
+<div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index:9999;" onclick="this.style.display='none'">
+  <img id="modal-img" src="" style="max-width: 90%; max-height: 90%; border: 5px solid white; border-radius: 8px;" />
+</div>
+
+<script>
+  function openModal(src) {
+    document.getElementById("modal-img").src = src;
+    document.getElementById("modal").style.display = "flex";
+  }
+</script>
+
+
+<section id="personality" class="section-personality" style="
+  position: relative;
+  background: url('personality.png') center center no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 4rem 2rem;
+  text-align: center;
+  overflow: hidden;
+">
+  <div style="
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+  ">
+    <p style="color: #004b9b; font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem;">
+      これからの田尻が求める人とは
+    </p>
+    <p style="font-size: 1.2rem; line-height: 2; margin-bottom: 3rem;">
+      お客様と仲間、地域社会の発展を大切にし、<br>
+      自分と田尻の成長に<br>
+      未来志向でチャレンジできる人
+    </p>
+
+    <div class="traits-container">
+      <div class="trait-card">
+        <h3>主体的に学び、動ける人</h3>
+        <p>決まった正解がない環境でも、自分なりに考え、前に進める人。<br>
+          与えられるのを待つのではなく、学びに向かう姿勢が未来を切り拓きます。</p>
+      </div>
+      <div class="trait-card">
+        <h3>誠実に、素直に向き合える人</h3>
+        <p>仲間やお客様との信頼を大切にし、正直に、真摯に向き合える人。<br>
+          自分の非を認められる素直さが、チームを強くします。</p>
+      </div>
+      <div class="trait-card">
+        <h3>変化を前向きに楽しめる人</h3>
+        <p>中小企業ならではのスピードと柔軟さを活かし、「こうあるべき」にとらわれず、変化を楽しみながら挑戦できる人。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section id="jobs" class="jobs-section">
+  <h2>職種紹介</h2>
+  <div class="job-cards">
+    <a href="sales.html" class="job-card">
+      <img src="job_sales.png" alt="営業職">
+      <div class="label">営業職</div>
+    </a>
+    <a href="construction.html" class="job-card">
+      <img src="job_construction.png" alt="施工管理職">
+      <div class="label">施工管理職</div>
+    </a>
+    <a href="worker.html" class="job-card">
+      <img src="job_worker.png" alt="施工職">
+      <div class="label">施工職</div>
+    </a>
+    <a href="factory.html" class="job-card">
+      <img src="job_factory.png" alt="製造職">
+      <div class="label">製造職</div>
+    </a>
+    <a href="cad.html" class="job-card">
+      <img src="job_cad.png" alt="CADオペレーター">
+      <div class="label">CADオペレーター</div>
+    </a>
+    <a href="office.html" class="job-card">
+      <img src="job_office.png" alt="事務職">
+      <div class="label">事務職</div>
+    </a>
+    <a href="backoffice.html" class="job-card">
+      <img src="job_backoffice.png" alt="バックオフィス">
+      <div class="label">バックオフィス</div>
+    </a>
+  </div>
+</section>
+
+
+<section id="data" style="padding: 4rem 2rem; background-color: #f4f6f8;">
+  <h2 style="text-align: center; color: #004b9b;">データで見る田尻</h2>
+  <div style="
+    max-width: 1000px;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  ">
+    <div style="background-color: #e0ecf8; padding: 1.5rem; border-radius: 8px;">
+      <h3 style="color: #004b9b;">従業員数</h3>
+      <p style="font-size: 2rem; font-weight: bold;">73名</p>
+    </div>
+    <div style="background-color: #e0ecf8; padding: 1.5rem; border-radius: 8px;">
+      <h3 style="color: #004b9b;">平均年齢</h3>
+      <p style="font-size: 2rem; font-weight: bold;">48.0歳</p>
+    </div>
+    <div style="background-color: #e0ecf8; padding: 1.5rem; border-radius: 8px;">
+      <h3 style="color: #004b9b;">男女比</h3>
+      <p style="font-size: 2rem; font-weight: bold;">男性 82% / 女性 18%</p>
+    </div>
+    <div style="background-color: #e0ecf8; padding: 1.5rem; border-radius: 8px;">
+      <h3 style="color: #004b9b;">平均勤続年数</h3>
+      <p style="font-size: 2rem; font-weight: bold;">10年</p>
+    </div>
+    <div style="background-color: #e0ecf8; padding: 1.5rem; border-radius: 8px;">
+      <h3 style="color: #004b9b;">年間休日</h3>
+      <p style="font-size: 2rem; font-weight: bold;">117日</p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section id="environment" style="padding: 4rem 2rem; background-color: #f4f6f8;">
+  <h2 style="text-align: center; color: #004b9b;">働く環境</h2>
+  <div style="max-width: 1000px; margin: 2rem auto; font-size: 1.1rem; line-height: 1.8;">
+    <p>田尻では、社員一人ひとりが安心して長く働けるよう、働きやすい環境づくりに取り組んでいます。</p>
+
+    <!-- 桐生本社 -->
+    <h3 style="margin-top: 2rem; color: #004b9b;">桐生本社</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <img src="kiryu01.png" style="width: 48%; border-radius: 8px;">
+      <img src="kiryu02.png" style="width: 48%; border-radius: 8px;">
+    </div>
+
+    <!-- 太田工場 -->
+    <h3 style="margin-top: 2rem; color: #004b9b;">太田工場</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <img src="oota01.png" style="width: 48%; border-radius: 8px;">
+      <img src="oota02.png" style="width: 48%; border-radius: 8px;">
+    </div>
+
+    <!-- 施工現場 -->
+    <h3 style="margin-top: 2rem; color: #004b9b;">施工現場</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <img src="sekou01.png" style="width: 48%; border-radius: 8px;">
+      <img src="sekou02.png" style="width: 48%; border-radius: 8px;">
+    </div>
+  </div>
+</section>
+
+
+
+<section id="internship" style="padding: 4rem 2rem; background-color: #f4f6f8;">
+  <h2 style="text-align: center; color: #004b9b;">インターンシップ情報</h2>
+  <div style="max-width: 900px; margin: 0 auto;">
+    <p>田尻では、学生の皆さんに業界や仕事の理解を深めてもらうため、インターンシップを実施しています。</p>
+    <h3>プログラム概要：</h3>
+    <ul style="list-style: disc; padding-left: 1.5rem;">
+      <li>期間：1日～5日間（時期により変動）</li>
+      <li>内容：会社説明、職場見学、業務体験、先輩社員との座談会 など</li>
+      <li>対象：大学生・短大生・専門学生（学部・学科不問）</li>
+      <li>場所：本社（○○県○○市）</li>
+    </ul>
+    <h3>応募方法：</h3>
+    <p>お問い合わせフォームよりお申し込みください。詳細は個別にご案内いたします。</p>
+  </div>
+</section>
+
+<section id="faq" style="padding: 4rem 2rem; background-color: #fff;">
+  <h2 style="text-align: center; color: #004b9b;">よくあるご質問</h2>
+  <div style="max-width: 900px; margin: 0 auto;">
+    <dl>
+      <dt><strong>Q. 未経験でも応募できますか？</strong></dt>
+      <dd>はい。職種によっては未経験からスタートした社員も多く、丁寧な研修制度があります。</dd>
+      <dt><strong>Q. 配属はどのように決まりますか？</strong></dt>
+      <dd>ご希望や適性、会社の状況を踏まえて総合的に判断いたします。</dd>
+      <dt><strong>Q. 勤務地は選べますか？</strong></dt>
+      <dd>可能な限りご希望を考慮いたします。詳細は面談時にご相談ください。</dd>
+      <dt><strong>Q. 選考の流れはどうなっていますか？</strong></dt>
+      <dd>書類選考 → 面接（1～2回）→ 内定という流れです。</dd>
+    </dl>
+  </div>
+</section>
+
+<script>
+  // スムーズスクロール機能
+  document.querySelectorAll('.menu a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href.startsWith("#")) {
+        e.preventDefault();
+        document.querySelector(href)?.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // ハンバーガーメニューのトグル機能
+  function toggleMenu() {
+    document.querySelector('.menu-links').classList.toggle('show');
+  }
+
+</script>
+
+  <!-- ←ここに固定ボタンを追加 -->
+  <a href="#contact" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #004b9b;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 9999;
+  ">
+    お問合せ・求人応募はこちら
+  </a>
+
+<footer style="background-color: #002f5f; color: white; padding: 2rem 1rem; text-align: center;">
+  <div style="max-width: 900px; margin: 0 auto; font-size: 0.9rem; line-height: 1.6;">
+    <p><strong>株式会社　田尻</strong></p>
+    <p>〒376-0013 群馬県桐生市広沢町4丁目2375<br>
+    TEL：0277-53-2805　/　FAX：0277-53-1700</p>
+    <p>© 2025 Tajiri Co., Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+
